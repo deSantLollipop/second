@@ -1,0 +1,28 @@
+<h2>Post edit</h2>
+<%= form_for @post do |f| %>
+  <p>
+    Name <br>
+    <%= f.text_field(:title, {:class => 'form-control'}) %>
+  </p>
+  <% if @post.errors.any? %>
+    <% @post.errors.each do |error| %>
+      <% if error.attribute.to_s.eql? "title" %>
+        <div class="alert alert-danger"><%= error.full_message %></div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <p>
+    Article text : <br>
+    <%= f.text_area(:body, {:class => 'form-control'}) %>
+  </p>
+  <% if @post.errors.any? %>
+    <% @post.errors.each do |error| %>
+      <% if error.attribute.to_s.eql? "body" %>
+        <div class="alert alert-danger"><%= "Article text " + error.message %></div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <p>
+    <%= f.submit({:class => 'btn btn-success'})%>
+  </p>
+<% end %>
