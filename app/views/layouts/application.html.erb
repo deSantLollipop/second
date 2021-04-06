@@ -49,8 +49,10 @@
               <div class="g"> <%= button_to 'Edit profile', edit_user_registration_path(@user), method: :get , :class => 'btn btn-warning' %></div>
               <div class="g"><%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-dark'  %></div>
             <% if current_user.admin %>
-              <div> <%= button_to "Admin Tools", tools_url, method: :get, :class => 'btn btn-outline-info'  %></div>
-              <% end %>
+              <div class="g">Admin Tools </div>
+              <div class="g"> <%= button_to "On", tools_url, method: :get, :class => 'btn btn-outline-info'  %></div>
+              <div class="g"> <%= button_to "Off", home_path, method: :get, :class => 'btn btn-outline-danger'  %></div>
+            <% end %>
           <% else %>
               <div class="g"> <%= button_to "Sign up", new_user_registration_path, method: :get , :class => 'btn btn-primary'  %></div>
               <div > <%= button_to "Login", new_user_session_path, :class => 'btn btn-outline-light me-2'  %></div>
