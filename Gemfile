@@ -52,3 +52,4 @@ gem 'net-http'
 
 gem 'mimemagic', '~> 0.3.6'
 
+gem 'devise'
