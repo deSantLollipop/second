@@ -13,7 +13,7 @@
   <% end %>
   <p>
     Article text : <br>
-    <%= f.text_area(:body, {:class => 'form-control'}) %>
+    <%= f.text_area(:body, {:class => 'form-control', :rows=>15}) %>
   </p>
   <% if @post.errors.any? %>
     <% @post.errors.each do |error| %>

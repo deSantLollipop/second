@@ -1,6 +1,6 @@
 <br>
 <h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
+<p><%= simple_format(@post.body) %></p>
 <% unless @post.user.nil? %> <p><%= @post.user.email %></p> <% end %>
 <hr>
 <% if current_user && current_user == @post.user %>

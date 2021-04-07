@@ -3,10 +3,10 @@
 <br>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  <% @post.each do |post| %>
-    <div class="col">
+    <% @post.each do |post| %>
+    <div class="col post_continer">
       <div class="card h-100">
-        <div class="card-body">
+        <div class="card-body" >
           <h3 class="card-title"><%= post.title %></h3>
           <div class="a">
             <p class="card-text"><%= post.body %></p>
