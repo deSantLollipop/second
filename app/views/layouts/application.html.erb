@@ -49,14 +49,15 @@
               <div class="g"> <%= button_to 'Edit profile', edit_user_registration_path(@user), method: :get , :class => 'btn btn-warning' %></div>
               <div class="g"><%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-dark'  %></div>
             <% if current_user.admin %>
-              <div class="g">Admin Tools </div>
-              <% current_uri = request.env['PATH_INFO'] %>
+               <% current_uri = request.env['PATH_INFO'] %>
               <% if ["/", "/admin/posts"].include? current_uri %>
+                <div class="g">Admin Tools </div>
                 <div class="g"> <%= button_to "On", tools_path, method: :get, :class => 'btn btn-outline-success'  %></div>
                 <div class="g"> <%= button_to "Off", home_path, method: :get, :class => 'btn btn-outline-danger'  %></div>
               <% else %>
-                <% if @post.respond_to?(:to_model) %>
-                <div class="g"> <%= button_to "On", [:admin, @post], method: :get, :class => 'btn btn-outline-success'  %></div>
+                <% if @post.respond_to?(:to_model) && !("/posts/new".include? current_uri) %>
+                  <div class="g">Admin Tools </div>
+                  <div class="g"> <%= button_to "On", [:admin, @post], method: :get, :class => 'btn btn-outline-success'  %></div>
                 <div class="g"> <%= button_to "Off", @post, method: :get, :class => 'btn btn-outline-danger'  %></div>
                 <% end %>
               <% end %>
