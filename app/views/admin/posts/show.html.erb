@@ -1,15 +1,15 @@
 <br>
 <h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
+<p><%= simple_format(@post.body) %></p>
 <% unless @post.user.nil? %> <p><%= @post.user.email %></p> <% end %>
 <hr>
-<%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-warning' %>
-<%= link_to "Delete", post_path(@post), method: :delete,
- data: {confirm: "Do you realy wan't to delete me?"}, :class => 'btn btn-danger' %>
+<%= link_to "Edit", edit_admin_post_path(@post), class: 'btn btn-warning' %>
+<%= link_to "Delete", admin_post_path(@post), method: :delete,
+ data: {confirm: "Do you realy wan't to delete me?"}, class: 'btn btn-danger' %>
   <% @post.comments.each do |comment| %>
   <div class="alert alert-light">
   <p><strong><%= comment.username %></strong>: <%= comment.body %><hr></p>
-    <%= link_to "Remove Comment", post_comment_path(comment), method: :delete, data: {confirm: "Remove?"}, :class => 'btn btn-warning' %>
+    <%= link_to "Remove Comment", admin_post_comment_path(comment), method: :delete, data: {confirm: "Remove?"}, class: 'btn btn-warning' %>
     </div>
 <% end %>
 <hr>

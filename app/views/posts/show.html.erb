@@ -4,15 +4,17 @@
 <% unless @post.user.nil? %> <p><%= @post.user.email %></p> <% end %>
 <hr>
 <% if current_user && current_user == @post.user %>
-<%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-warning' %>
-<%= link_to "Delete", post_path(@post), method: :delete,
- data: {confirm: "Do you realy wan't to delete me?"}, :class => 'btn btn-danger' %>
+  <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-warning' %>
+  <% if policy(@post).destroy? %>
+    <%= link_to "Delete", post_path(@post), method: :delete,
+       data: {confirm: "Do you realy wan't to delete me?"}, class: 'btn btn-danger' %>
   <% end %>
+<% end %>
 <% @post.comments.each do |comment| %>
   <div class="alert alert-light">
   <p><strong><%= comment.username %></strong>: <%= comment.body %><hr></p>
     <% if current_user && current_user.email == comment.username %>
-    <%= link_to "Remove Comment", post_comment_path(comment), method: :delete, data: {confirm: "Remove?"}, :class => 'btn btn-warning' %>
+    <%= link_to "Remove Comment", post_comment_path(comment), method: :delete, data: {confirm: "Remove?"}, class: 'btn btn-warning' %>
     <% end %>
   </div>
 <% end %>
@@ -24,13 +26,13 @@
   <% else %>
     <p>
     Username <br>
-    <%= f.text_field(:username, {:class => 'form-control'}) %></p>
+    <%= f.text_field(:username, {class: 'form-control'}) %></p>
   <% end %>
   <p>
     Comment: <br>
-    <%= f.text_area(:body, {:class => 'form-control'}) %>
+    <%= f.text_area(:body, {class: 'form-control'}) %>
   </p>
   <p>
-    <%= f.submit("Add comment", {:class => 'btn btn-success'})%>
+    <%= f.submit("Add comment", {class: 'btn btn-success'})%>
   </p>
 <% end %>

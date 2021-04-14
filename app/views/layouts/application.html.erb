@@ -5,27 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-
     <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    <style>
-      .a-secondary{ color: lightslategrey; }
-      .a-primary{ color: azure; }
-      .a-sp{ color: azure; font-family: "Sofia", sans-serif; font-size: 35px; font-weight: bold;}
-      .a-sp:hover { color: lightslategrey; font-family: "Sofia", sans-serif; font-size: 35px; font-weight: bold; text-decoration: none;}
-      .nav-link {font-size: 20px;}
-      div.a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .g { margin-right: 5px; }
-    </style>
-
   </head>
-
   <body>
-
     <header class="p-3 bg-dark text-white">
      <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -46,26 +31,26 @@
           -->
           <% if user_signed_in? %>
               <div class="g"> Logged in as : <strong> <%= current_user.email %> </strong> </div>
-              <div class="g"> <%= button_to 'Edit profile', edit_user_registration_path(@user), method: :get , :class => 'btn btn-warning' %></div>
-              <div class="g"><%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-dark'  %></div>
+              <div class="g"> <%= button_to 'Edit profile', edit_user_registration_path(@user), method: :get , class: 'btn btn-warning' %></div>
+              <div class="g"><%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-dark'  %></div>
             <% if current_user.admin %>
                <% current_uri = request.env['PATH_INFO'] %>
               <% if ["/", "/admin/posts"].include? current_uri %>
                 <div class="g">Admin Tools </div>
-                <div class="g"> <%= button_to "On", tools_path, method: :get, :class => 'btn btn-outline-success'  %></div>
-                <div class="g"> <%= button_to "Off", home_path, method: :get, :class => 'btn btn-outline-danger'  %></div>
+                <div class="g"> <%= button_to "On", tools_path, method: :get, class: 'btn btn-success' %></div>
+                <div class="g"> <%= button_to "Off", home_path, method: :get, class: 'btn btn-danger'  %></div>
               <% else %>
                 <% if @post.respond_to?(:to_model) && !("/posts/new".include? current_uri) %>
                   <div class="g">Admin Tools </div>
-                  <div class="g"> <%= button_to "On", [:admin, @post], method: :get, :class => 'btn btn-outline-success'  %></div>
-                <div class="g"> <%= button_to "Off", @post, method: :get, :class => 'btn btn-outline-danger'  %></div>
+                  <div class="g"> <%= button_to "On", [:admin, @post], method: :get, class: 'btn btn-success'  %></div>
+                  <div class="g"> <%= button_to "Off", @post, method: :get, class: 'btn btn-danger'  %></div>
                 <% end %>
               <% end %>
             <% end %>
 
           <% else %>
-              <div class="g"> <%= button_to "Sign up", new_user_registration_path, method: :get , :class => 'btn btn-primary'  %></div>
-              <div > <%= button_to "Login", new_user_session_path, :class => 'btn btn-outline-light me-2'  %></div>
+              <div class="g"> <%= button_to "Sign up", new_user_registration_path, method: :get , class: 'btn btn-primary'  %></div>
+              <div > <%= button_to "Login", new_user_session_path, class: 'btn btn-outline-light me-2'  %></div>
           <% end %>
         </div>
       </div>

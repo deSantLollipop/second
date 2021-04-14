@@ -4,7 +4,7 @@
 <%= form_for :post, url: posts_path do |f| %>
   <p>
    Name <br>
-   <%= f.text_field(:title, {:class => 'form-control'}) %>
+   <%= f.text_field(:title, {class: 'form-control'}) %>
   </p>
   <% if @post.errors.any? %>
     <% @post.errors.each do |error| %>
@@ -15,7 +15,7 @@
   <% end %>
   <p>
     Article text : <br>
-    <%= f.text_area(:body, {:class => 'form-control'}) %>
+    <%= f.text_area(:body, {class: 'form-control'}) %>
   </p>
   <% if @post.errors.any? %>
     <% @post.errors.each do |error| %>
@@ -25,6 +25,6 @@
     <% end %>
   <% end %>
   <p>
-    <%= f.submit({:class => 'btn btn-success'})%>
+    <%= f.submit({class: 'btn btn-success'})%>
   </p>
 <% end %>

@@ -1,7 +1,7 @@
 class Admin::PostsController < Admin::ApplicationController
-  #http_basic_authenticate_with name: "admin", password: "adminchik",
+  # http_basic_authenticate_with name: "admin", password: "adminchik",
   #                             except: [:index, :show]
-  before_action :authenticate_user! , except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
     @post = Post.all
@@ -22,8 +22,8 @@ class Admin::PostsController < Admin::ApplicationController
   def update
     @post = Post.find(params[:id])
 
-    if(@post.update(post_params))
-      redirect_to @post
+    if @post.update(post_params)
+      redirect_to admin_post_path, notice: 'Post was updated by admin.'
     else
       render 'edit'
     end
@@ -31,26 +31,26 @@ class Admin::PostsController < Admin::ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    if @post.user = current_user
+    # authorize @post
     @post.destroy
-    redirect_to posts_path
-    end
+    redirect_to tools_path, notice: 'Post was successfully deleted by admin'
   end
 
-  def create
-    #render plain: params[:post].inspect
+  /def create
+    # render plain: params[:post].inspect
     @post = Post.new(post_params)
     @post.user = current_user
-    if(@post.save)
+    if @post.save
       #  @post.save
-      redirect_to @post
+      redirect_to @post, notice: 'Post was created by admin.'
     else
       render 'new'
     end
-  end
+  end/
 
-  private def post_params
+  private
+
+  def post_params
     params.require(:post).permit(:title, :body)
   end
-
 end

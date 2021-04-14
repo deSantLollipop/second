@@ -1,23 +1,26 @@
 class PostPolicy < ApplicationPolicy
-
   class Scope < Scope
     def resolve
-      if !user.nil?
+      unless user.nil?
         if user.admin?
-         scope.all
+          scope.all
         else
-         scope.where(published: true)
+          scope.where(published: true)
         end
       end
     end
   end
 
+  def destroy?
+    user.admin? # or !post.published?
+  end
+
   def update?
-    user.admin? or not post.published?
+    user.present? or !post.published?
   end
 
   def edit?
-    user.admin? or not post.published?
+    user.present? or !post.published?
   end
 
   def new?
@@ -27,5 +30,4 @@ class PostPolicy < ApplicationPolicy
   def create?
     user.present?
   end
-
 end

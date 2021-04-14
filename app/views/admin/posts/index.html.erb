@@ -12,8 +12,8 @@
             <p class="card-text"><%= post.body %></p>
           </div>
           <br>
-          <%= link_to "Continue reading..", admin_post_path(post), :class => 'btn btn-outline-primary' %>
-          <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Do you realy wan't to delete me?"}, :class => 'btn btn-danger' %>
+          <%= link_to "Continue reading..", admin_post_path(post), class: 'btn btn-outline-primary' %>
+          <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Do you realy wan't to delete me?"}, class: 'btn btn-danger' %>
         </div>
       </div>
     </div>
