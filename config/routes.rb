@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+
   root 'posts#index', as: 'home'
 
   get 'admin/posts', to: 'admin/posts#index', as: 'tools'
 
   get 'about' => 'pages#about', as: 'about'
+
 
   resources :posts do
     resources :comments
@@ -16,4 +18,7 @@ Rails.application.routes.draw do
       resources :comments
     end
   end
+
+
+
 end

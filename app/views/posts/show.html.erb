@@ -5,9 +5,11 @@
 <hr>
 <% if current_user && current_user == @post.user %>
   <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-warning' %>
-  <% if policy(@post).destroy? %>
+  <% unless defined?(policy(@post).destroy?).nil?%>
+    <% if policy(@post).destroy? %>
     <%= link_to "Delete", post_path(@post), method: :delete,
        data: {confirm: "Do you realy wan't to delete me?"}, class: 'btn btn-danger' %>
+    <% end %>
   <% end %>
 <% end %>
 <% @post.comments.each do |comment| %>

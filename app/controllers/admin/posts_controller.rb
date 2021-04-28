@@ -13,6 +13,14 @@ class Admin::PostsController < Admin::ApplicationController
 
   def show
     @post = Post.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name", template: "posts/show.html.erb"
+      end
+    end
+
   end
 
   def edit

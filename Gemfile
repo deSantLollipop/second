@@ -57,3 +57,14 @@ gem 'devise'
 gem 'pundit'
 
 gem 'rubocop', require: false
+
+gem 'sidekiq'
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+gem 'redis'
+gem 'redis-namespace'
+gem 'redis-rails'
+
+gem 'dotenv-rails', groups: [:development, :test]

@@ -7,8 +7,14 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <!--
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'main' %>
+    -->
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <%= favicon_link_tag asset_path('favicon.ico') %>
   </head>
   <body>
     <header class="p-3 bg-dark text-white">
@@ -44,7 +50,17 @@
                   <div class="g">Admin Tools </div>
                   <div class="g"> <%= button_to "On", [:admin, @post], method: :get, class: 'btn btn-success'  %></div>
                   <div class="g"> <%= button_to "Off", @post, method: :get, class: 'btn btn-danger'  %></div>
-                <% end %>
+
+                  <% post_pdf = request.env['PATH_INFO']+'.pdf' %>
+                  <div class="g"> <%=link_to "Page to PDF ", post_pdf,
+                                               class: 'btn btn-outline-primary' %>
+                  <!-- <div class="g"> <%=button_to "Page to PDF "+@post.id.to_s, HardWorker.perform_async(@post.id),
+                                               class: 'btn btn-outline-primary' %></div>
+                  -->
+
+
+
+        <% end %>
               <% end %>
             <% end %>
 
