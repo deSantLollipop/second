@@ -68,3 +68,5 @@ gem 'redis-namespace'
 gem 'redis-rails'
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'byebug'

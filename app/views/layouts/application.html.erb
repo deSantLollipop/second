@@ -51,12 +51,10 @@
                   <div class="g"> <%= button_to "On", [:admin, @post], method: :get, class: 'btn btn-success'  %></div>
                   <div class="g"> <%= button_to "Off", @post, method: :get, class: 'btn btn-danger'  %></div>
 
-                  <% post_pdf = request.env['PATH_INFO']+'.pdf' %>
-                  <div class="g"> <%=link_to "Page to PDF ", post_pdf,
-                                               class: 'btn btn-outline-primary' %>
-                  <!-- <div class="g"> <%=button_to "Page to PDF "+@post.id.to_s, HardWorker.perform_async(@post.id),
+                  <!-- <% post_pdf = request.env['PATH_INFO']+'.pdf' %> -->
+                  <div class="g"> <%=link_to "Page to PDF ", worker_path(id: @post.id), method: :get,
                                                class: 'btn btn-outline-primary' %></div>
-                  -->
+
 
 
 

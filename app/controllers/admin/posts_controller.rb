@@ -44,6 +44,24 @@ class Admin::PostsController < Admin::ApplicationController
     redirect_to tools_path, notice: 'Post was successfully deleted by admin'
   end
 
+  def worker
+   @post = Post.find(params[:id])
+
+   job = HardWorker.perform_async(@post.id)
+
+   #respond_to do |format|
+   #   msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
+   #   format.json  { render :json => msg } # don't do msg.to_json
+   # end
+
+   msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
+   render :json => msg
+
+  end
+
+
+
+
   /def create
     # render plain: params[:post].inspect
     @post = Post.new(post_params)

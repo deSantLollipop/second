@@ -10,16 +10,9 @@ class HardWorker
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "Invoice No. #{post_id}",
-               page_size: 'A4',
-               template: "posts/show.html.erb",
-               layout: "pdf.html",
-               orientation: "Landscape",
-               lowquality: true,
-               zoom: 1,
-               dpi: 75
+        render pdf: "file_name", template: "posts/show.html.erb"
       end
     end
-
   end
+
 end
