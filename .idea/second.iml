@@ -125,6 +125,7 @@
     <orderEntry type="library" scope="PROVIDED" name="wicked_pdf (v2.1.0, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="wkhtmltopdf-binary (v0.12.6.5, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="zeitwerk (v2.4.2, RVM: ruby-3.0.0 [global]) [gem]" level="application" />
+    <orderEntry type="library" name="@types/jquery" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />

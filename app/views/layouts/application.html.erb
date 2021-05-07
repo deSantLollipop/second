@@ -8,14 +8,20 @@
     <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <!--
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'main' %>
     -->
 
+    <%= javascript_include_tag 'status_check' %>
+    <%= javascript_include_tag 'run_worker' %>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <%= favicon_link_tag asset_path('favicon.ico') %>
   </head>
+
   <body>
     <header class="p-3 bg-dark text-white">
      <div class="container">
@@ -52,11 +58,8 @@
                   <div class="g"> <%= button_to "Off", @post, method: :get, class: 'btn btn-danger'  %></div>
 
                   <!-- <% post_pdf = request.env['PATH_INFO']+'.pdf' %> -->
-                  <div class="g"> <%=link_to "Page to PDF ", worker_path(id: @post.id), method: :get,
-                                               class: 'btn btn-outline-primary' %></div>
-
-
-
+                  <% current_uri = worker_path(id: @post.id) %>
+                  <div class="g"> <%=button_to "Page to PDF ", worker_path(id: @post.id), class: 'btn btn-outline-primary js-run-worker', data: {url: current_uri }%></div>
 
         <% end %>
               <% end %>
@@ -82,6 +85,8 @@
       <% end %>
 
       <%= yield %>
+
     </div>
+
   </body>
 </html>

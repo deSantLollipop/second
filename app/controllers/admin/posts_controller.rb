@@ -49,14 +49,15 @@ class Admin::PostsController < Admin::ApplicationController
 
    job = HardWorker.perform_async(@post.id)
 
-   #respond_to do |format|
-   #   msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
-   #   format.json  { render :json => msg } # don't do msg.to_json
-   # end
+   respond_to do |format|
+     #byebug
+      msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
+      format.json  { render :json => msg }
+      format.html
+   end
 
-   msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
-   render :json => msg
-
+   #msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
+   #render :json => msg
   end
 
 
