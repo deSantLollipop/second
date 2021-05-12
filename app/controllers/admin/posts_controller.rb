@@ -1,7 +1,9 @@
 class Admin::PostsController < Admin::ApplicationController
   # http_basic_authenticate_with name: "admin", password: "adminchik",
   #                             except: [:index, :show]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show worker]
+  #protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
   def index
     @post = Post.all
@@ -44,22 +46,26 @@ class Admin::PostsController < Admin::ApplicationController
     redirect_to tools_path, notice: 'Post was successfully deleted by admin'
   end
 
+
   def worker
    @post = Post.find(params[:id])
 
    job = HardWorker.perform_async(@post.id)
 
    respond_to do |format|
-     #byebug
-      msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
+
+      msg = { :status => "In progress", :message => "worker started!", :html => "<b>...</b>" }
       format.json  { render :json => msg }
       format.html
    end
 
-   #msg = { :status => "ok", :message => "Success!", :html => "<b>...</b>" }
-   #render :json => msg
+   data = Sidekiq::Status
+
   end
 
+  def worker_status
+
+  end
 
 
 

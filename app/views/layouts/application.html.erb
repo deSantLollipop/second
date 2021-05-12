@@ -59,9 +59,10 @@
 
                   <!-- <% post_pdf = request.env['PATH_INFO']+'.pdf' %> -->
                   <% current_uri = worker_path(id: @post.id) %>
-                  <div class="g"> <%=button_to "Page to PDF ", worker_path(id: @post.id), class: 'btn btn-outline-primary js-run-worker', data: {url: current_uri }%></div>
+                  <div class="g"> <%=button_to "Page to PDF ", worker_path(id: @post.id), class: 'btn btn-outline-primary js-run-worker', data: {url: "#{current_uri}" }%></div>
 
-        <% end %>
+
+                <% end %>
               <% end %>
             <% end %>
 

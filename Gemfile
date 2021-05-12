@@ -59,6 +59,7 @@ gem 'pundit'
 gem 'rubocop', require: false
 
 gem 'sidekiq'
+gem 'sidekiq-status'
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'

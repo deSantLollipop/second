@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'pages#about', as: 'about'
 
-  post 'worker' => 'admin/posts#worker', as: 'worker'
-
+  post 'worker/:id' => 'admin/posts#worker', as: 'worker'
+  get 'worker/:id' => 'admin/posts#worker', as: 'worker_get'
 
   resources :posts do
     resources :comments
