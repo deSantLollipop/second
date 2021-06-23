@@ -6,8 +6,18 @@ Rails.application.routes.draw do
 
   get 'about' => 'pages#about', as: 'about'
 
-  post 'worker/:id' => 'admin/posts#worker', as: 'worker'
-  get 'worker/:id' => 'admin/posts#worker', as: 'worker_get'
+
+  get 'worker/:id' => 'admin/posts#worker', as: 'worker'
+  post 'worker/:id' => 'admin/posts#worker', as: 'worker_post'
+
+  get 'worker_status/:id' => 'admin/posts#worker_status', as: 'worker_status'
+  post 'worker_status/:id' => 'admin/posts#worker_status', as: 'worker_status_post'
+
+  get 'pdf/:id' => 'admin/posts#pdf', as: 'pdf'
+
+  get 'download/:pdf_name' => 'admin/posts#download', as: 'download'
+  post 'download/' => 'admin/posts#download', as: 'download_post'
+
 
   resources :posts do
     resources :comments

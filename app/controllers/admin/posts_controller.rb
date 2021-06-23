@@ -50,23 +50,65 @@ class Admin::PostsController < Admin::ApplicationController
   def worker
    @post = Post.find(params[:id])
 
-   job = HardWorker.perform_async(@post.id)
+                                 #post_path(@post) /2
+                                 #post_url(@post) /localhost/posts/2
+   job_id = HardWorker.perform_async(@post.id)
+   #               .new.perform(@post.id) - perform now
+
+   session[:passed_variable] = job_id
+
+   status = Sidekiq::Status::status(job_id)
+   total = Sidekiq::Status::total(job_id)
+
+   url=worker_status_post_path(@post)
 
    respond_to do |format|
-
-      msg = { :status => "In progress", :message => "worker started!", :html => "<b>...</b>" }
+      msg = { :status => status.to_s, :total => total.to_s, :job_id => job_id, :message => "started", :url => url , :html => "<b>...</b>" }
       format.json  { render :json => msg }
       format.html
    end
-
-   data = Sidekiq::Status
-
   end
 
   def worker_status
 
+    @post = Post.find(params[:id])
+
+    job_id = session[:passed_variable]
+
+    status = Sidekiq::Status::status(job_id)
+    total = Sidekiq::Status::total(job_id)
+
+    url = pdf_path(@post)
+
+    respond_to do |format|
+      msg = { :status => status.to_s, :total => total.to_s, :job => job_id, :message => "in process", :url => url , :html => "<b>...</b>" }
+      format.json  { render :json => msg }
+      format.html
+    end
+
   end
 
+  def pdf
+    pdf_name = 'post_'+ params[:id].to_s
+    pdf_url = Rails.root.join("public", "assets", pdf_name)
+
+    respond_to do |format|
+      msg = { :message => "pdf url", :pdf_name => pdf_name, :pdf_url => pdf_url, :url => download_post_path, :html => "<b>...</b>" }
+      format.json  { render :json => msg }
+      format.html
+    end
+  end
+
+  def download
+    pdf_name = params[:pdf_name]+'.pdf'
+    pdf_url = Rails.root.join("public", "assets", pdf_name)
+    File.open(pdf_url, 'r') do |f|
+      send_data f.read.force_encoding('BINARY'), :filename => params[:pdf_name], :type => "application/pdf", :disposition => "inline"
+    end
+
+
+
+  end
 
 
   /def create
