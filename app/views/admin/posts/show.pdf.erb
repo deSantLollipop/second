@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+<style>
+    h1 {
+        font-family: "Sofia", sans-serif;
+        font-weight: bold;
+        color: #212529;
+    }
+    p {
+        font-family: Tahoma, Verdana, sans-serif;
+        font-size: medium;
+        color: #212529;
+    }
+    html {
+        background: #fffffa;
+    }
+
+    #pageFooter {
+        page-break-before: avoid;
+        counter-increment: page;
+    }
+    #pageFooter:after
+    {
+        font-family: Tahoma, Verdana, sans-serif;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        display: block;
+        text-align: right;
+        content: "Page: " counter(page);
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+</style>
+<br>
+<h1><%= post.title %></h1>
+<p><%= simple_format(post.body) %></p>
+<% unless post.user.nil? %> <p><%= post.user.email %></p> <% end %>
+<hr>
+  <% post.comments.each do |comment| %>
+  <div class="alert alert-light">
+  <p><strong><%= comment.username %></strong>: <%= comment.body %><hr></p>
+    </div>
+<% end %>
+<div id="content">
+  <div id="pageFooter">
+  </div>
+</div>
+
