@@ -102,12 +102,8 @@ class Admin::PostsController < Admin::ApplicationController
   def download
     pdf_name = params[:pdf_name]+'.pdf'
     pdf_url = Rails.root.join("public", "assets", pdf_name)
-    File.open(pdf_url, 'r') do |f|
-      send_data f.read.force_encoding('BINARY'), :filename => params[:pdf_name], :type => "application/pdf", :disposition => "inline"
-    end
-
-
-
+    f = File.open(pdf_url, 'r')
+    send_data f.read.force_encoding('BINARY'), :filename => params[:pdf_name], :type => "application/pdf", :disposition => "inline"
   end
 
 

@@ -71,3 +71,10 @@ gem 'redis-rails'
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'byebug'
+
+#gem 'bcrypt'
+
+gem 'rack-cors'
+
+gem 'jwt_sessions'
+
